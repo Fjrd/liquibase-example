@@ -2,12 +2,32 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/liquibase-example
     username: fjrd
+    driver-class-name: org.postgresql.Driver
 
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: validate
 
   liquibase:
     enabled: true
-    change-log: classpath:db/changelog/db.changelog-master.xml
+# doesn't work
+#    change-log: classpath:db/changelog/db.changelog-master.xml
+#    url: ${spring.datasource.url}
+#    driver-class-name: ${spring.datasource.driver-class-name}
+#    user: ${spring.datasource.username}
+
+
+# doesn't work too
+# liquibase region
+#url: @spring.datasource.url@
+#username: @spring.datasource.username@
+#driver: @spring.datasource.driver-class-name@
+#changeLogFile: classpath:db/changelog/db.changelog-master.xml
+
+
+# liquibase region
+changeLogFile= db/changelog/db.changelog-master.xml
+url= jdbc:postgresql://localhost:5432/liquibase-example
+driver= org.postgresql.Driver
+username= fjrd
